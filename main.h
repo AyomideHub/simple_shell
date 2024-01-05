@@ -4,12 +4,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <conio.h>
 #include <unistd.h>
 #include <stdarg.h>
 #include <sys/types.h>
 #include <unistd.h>
 #include <sys/wait.h>
 
-#endif /* MAIN_H */
+char *display_prompt();
 
+#endif /* MAIN_H */
