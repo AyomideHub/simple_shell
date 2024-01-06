@@ -8,7 +8,7 @@
 
 int main(void)
 {
-	char *command, *token;
+	char *command, *token, *exepath;
 	char **Arg;
 	int i = 0, status;
 
@@ -33,12 +33,14 @@ int main(void)
 		}
 		Arg[i] = NULL;
 
+		exepath = get_path(Arg[0]);
+
 		if (fork() != 0)
 			wait(&status);
 		else
 		{
-			if (execve(Arg[0], Arg, NULL) == -1)
-				perror("Error");
+			if (execve(exepath, Arg, NULL) == -1)
+				perror("Error: command not found");
 
 			write(1, "\n", 1);
 		}

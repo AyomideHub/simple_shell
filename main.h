@@ -11,5 +11,7 @@
 #include <sys/wait.h>
 
 char *display_prompt();
+char * get_path(char* Arg);
+char * filepath(char *path, char *Arg);
 
 #endif /* MAIN_H */
