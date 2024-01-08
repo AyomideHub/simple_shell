@@ -33,16 +33,26 @@ int main(void)
 		}
 		Arg[i] = NULL;
 
-		exepath = get_path(Arg[0]);
-
-		if (fork() != 0)
-			wait(&status);
-		else
+		if (access(Arg[0], X_OK) == 0)
 		{
-			if (execve(exepath, Arg, NULL) == -1)
+			if (fork() != 0)
+			{
+				wait(&status);
+			} else
+			{
+				if (execve(Arg[0], Arg, NULL) == -1)
+					perror("Error: command not found");
+			}
+		} else
+		{
+			exepath = get_path(Arg[0]);
+			if (fork() != 0)
+				wait(&status);
+			else
+			{
+				if (execve(exepath, Arg, NULL) == -1)
 				perror("Error: command not found");
-
-			write(1, "\n", 1);
+			}
 		}
 		i = 0;
 		free(Arg);
