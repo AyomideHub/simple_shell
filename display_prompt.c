@@ -15,7 +15,7 @@ char *display_prompt()
 
 	if (isatty(0))
 		write(1, "#cisfun$ ", 9);
-	
+
 	returnVal = getline(&cmd, &cmd_size, stdin);
 	if (returnVal == -1)
 	{

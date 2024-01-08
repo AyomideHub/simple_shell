@@ -33,32 +33,34 @@ int main(void)
 		}
 		Arg[i] = NULL;
 
-		if (access(Arg[0], X_OK) == 0)
+		if (builtInCmd(Arg) == -1)
 		{
-			if (fork() != 0)
+			if (access(Arg[0], X_OK) == 0)
 			{
-				wait(&status);
+				if (fork() != 0)
+				{	
+					wait(&status);
+				}else
+				{
+					if (execve(Arg[0], Arg, NULL) == -1)
+					perror("Error: command not found");
+				}
 			} else
 			{
-				if (execve(Arg[0], Arg, NULL) == -1)
+				exepath = get_path(Arg[0]);
+				if (fork() != 0)
+					wait(&status);
+				else
+				{
+					if (execve(exepath, Arg, NULL) == -1)
 					perror("Error: command not found");
-			}
-		} else
-		{
-			exepath = get_path(Arg[0]);
-			if (fork() != 0)
-				wait(&status);
-			else
-			{
-				if (execve(exepath, Arg, NULL) == -1)
-				perror("Error: command not found");
+				}
 			}
 		}
+			
 		i = 0;
-		free(Arg);
+                free(Arg);	
 		
 	}
-
-
 	return (0);
 }

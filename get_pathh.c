@@ -1,13 +1,13 @@
 #include "main.h"
 
 
-char * filepath(char *path, char *Arg)
+char *filepath(char *path, char *Arg)
 {
 	char *path2 = strdup(path);
 
 	char *pathtoken = strtok(path2, ":");
 
-	char *real_path = malloc(sizeof(char ) * strlen(Arg) + 2);
+	char *real_path = malloc(sizeof(char) * strlen(Arg) + 2);
 
 	while (pathtoken != NULL)
 	{
@@ -27,13 +27,12 @@ char * filepath(char *path, char *Arg)
 	free(real_path);
 	free(path2);
 
-
 	return (NULL);
 }
 
 
 
-char * get_path(char* Arg)
+char *get_path(char *Arg)
 {
 	char *path = getenv("PATH");
 
