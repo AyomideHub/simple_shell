@@ -10,6 +10,7 @@
 
 int builtInCmd(char **Arg)
 {
+
 	if (strcmp(Arg[0], "exit") == 0)
 	{
 		free(Arg);
@@ -20,13 +21,17 @@ int builtInCmd(char **Arg)
 		if (Arg[1] == NULL)
 		{
 			chdir(getenv("HOME"));
+			free(Arg);
 			return (0);
 		}
 		else
 		{
 			chdir(Arg[1]);
+			free(Arg);
 			return (0);
 		}
 	} else
+	{
 		return (-1);
+	}
 }

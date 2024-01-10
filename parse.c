@@ -32,5 +32,6 @@ char **parse_str(char *command)
 	i = 0;
 	return (arg);
 	free(arg);
+	free(token);
 
 }

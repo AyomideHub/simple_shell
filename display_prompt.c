@@ -9,8 +9,8 @@
 char *display_prompt()
 {
 
-	char *cmd;
-	size_t cmd_size = 0;
+	char *cmd = malloc(3);
+	size_t cmd_size = 3;
 	ssize_t Val;
 
 	if (isatty(0))
@@ -26,4 +26,5 @@ char *display_prompt()
 	}
 
 	return (cmd);
+	free(cmd);
 }

@@ -25,6 +25,5 @@ int main(void)
 
 	free(Arg);
 	free(command);
-
 	return (0);
 }
