@@ -1,16 +1,15 @@
 #include "main.h"
 
 /*
-* main - shell command interpreter
-*
-*return (0);
+* main - shell command interpreter program in c
+* @void: no Argunment
+* Return (0);
 */
 
 int main(void)
 {
-	char *command, *token, *exepath;
+	char *command;
 	char **Arg;
-	int i = 0, status;
 
 
 	while (1)
@@ -19,48 +18,13 @@ int main(void)
 		if (command == NULL)
 			exit(0);
 
-		token = strtok(command, " \t\n");
+		Arg = parse_str(command);
 
-		Arg = malloc(sizeof(char *) * strlen(command) + 2);
-		if (Arg == NULL)
-			exit(0);
-
-		while (token != NULL)
-		{
-			Arg[i] = token;
-			token = strtok(NULL, " \t\n");
-			i++;
-		}
-		Arg[i] = NULL;
-
-		if (builtInCmd(Arg) == -1)
-		{
-			if (access(Arg[0], X_OK) == 0)
-			{
-				if (fork() != 0)
-				{	
-					wait(&status);
-				}else
-				{
-					if (execve(Arg[0], Arg, NULL) == -1)
-					perror("Error: command not found");
-				}
-			} else
-			{
-				exepath = get_path(Arg[0]);
-				if (fork() != 0)
-					wait(&status);
-				else
-				{
-					if (execve(exepath, Arg, NULL) == -1)
-					perror("Error: command not found");
-				}
-			}
-		}
-			
-		i = 0;
-                free(Arg);	
-		
+		execute_command(Arg);
 	}
+
+	free(Arg);
+	free(command);
+
 	return (0);
 }

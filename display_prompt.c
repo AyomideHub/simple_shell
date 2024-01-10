@@ -11,15 +11,17 @@ char *display_prompt()
 
 	char *cmd;
 	size_t cmd_size = 0;
-	ssize_t returnVal;
+	ssize_t Val;
 
 	if (isatty(0))
 		write(1, "#cisfun$ ", 9);
 
-	returnVal = getline(&cmd, &cmd_size, stdin);
-	if (returnVal == -1)
+	Val = getline(&cmd, &cmd_size, stdin);
+
+	if (Val == -1)
 	{
 		write(1, "\n", 1);
+		free(cmd);
 		exit(0);
 	}
 

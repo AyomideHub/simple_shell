@@ -14,5 +14,7 @@ char *display_prompt();
 char *get_path(char *Arg);
 char *filepath(char *path, char *Arg);
 int builtInCmd(char **Arg);
+void execute_command(char **Arg);
+char **parse_str(char *command);
 
 #endif /* MAIN_H */

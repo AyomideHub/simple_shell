@@ -1,5 +1,13 @@
 #include "main.h"
 
+/**
+ * filepath - get the path to a command and checkif it exist
+ * @path: Arguments
+ * @Arg: Arguments to be checked
+ *
+ * Return: pointer to a string
+ */
+
 
 char *filepath(char *path, char *Arg)
 {
@@ -24,6 +32,7 @@ char *filepath(char *path, char *Arg)
 		pathtoken = strtok(NULL, ":");
 
 	}
+	free(pathtoken);
 	free(real_path);
 	free(path2);
 
@@ -31,6 +40,14 @@ char *filepath(char *path, char *Arg)
 }
 
 
+
+/**
+ * get_path - get the path environment variable
+ *
+ * @Arg: Arguments to be checked
+ *
+ * Return: pointer to a string
+ */
 
 char *get_path(char *Arg)
 {
